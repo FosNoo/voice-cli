@@ -26,7 +26,7 @@ DEFAULTS: dict[str, Any] = {
         "beam_size": 5,
         "initial_prompt": None,
     },
-    "injector": {"mode": "clipboard", "auto_submit": False},
+    "injector": {"mode": "clipboard", "auto_submit": False, "refocus_target": True},
     "recordings": {"save": False, "dir": "recordings"},
 }
 

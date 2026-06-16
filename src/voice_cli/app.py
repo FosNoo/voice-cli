@@ -29,6 +29,7 @@ def main() -> None:
     from .config import load_config
     from .recorder import ToggleRecorder
     from .transcriber import FasterWhisperTranscriber
+    from .window import focus_window, get_foreground_window
 
     cfg = load_config(CONFIG_PATH)
     tcfg, acfg, rcfg = cfg["transcriber"], cfg["audio"], cfg["recordings"]
@@ -51,6 +52,8 @@ def main() -> None:
     tail = float(acfg.get("tail_seconds", 0.4))
     rec = ToggleRecorder()
     restore = cfg["injector"].get("mode", "clipboard") == "clipboard"
+    refocus = cfg["injector"].get("refocus_target", True)
+    target = {"hwnd": None}  # window focused when recording started
 
     def _beep(freq: int, ms: int = 130) -> None:
         try:
@@ -63,6 +66,8 @@ def main() -> None:
     def on_hotkey() -> None:
         try:
             if rec.toggle() == "start":
+                if refocus:
+                    target["hwnd"] = get_foreground_window()  # remember where to paste
                 mic.start()  # open the mic FIRST so anything said during the cue is captured
                 time.sleep(warmup)  # warm the stream before cueing
                 _beep(1000)  # "go" cue — recorded as a harmless leading tone, ignored by ASR
@@ -79,6 +84,9 @@ def main() -> None:
                 _log("... transcribing")
                 text = transcriber.transcribe(audio)
                 if text:
+                    if refocus and target["hwnd"]:
+                        focus_window(target["hwnd"])  # bring the target window back to front
+                        time.sleep(0.12)  # let focus settle before pasting
                     injector.paste_text(text, restore_clipboard=restore)
                     _log(f"-> inserted: {text}")
                 else:

@@ -64,10 +64,14 @@ python -m src.voice_cli
 It prints the device it loaded on (`CPU` or `CUDA`) and then `ready - press [f9]...`.
 
 Then, in **any** window with a text field (a terminal, an editor, a chat box):
-1. Click into the text field so it has focus.
+1. **Click into the target text field first** (e.g. Notepad) so it has focus.
 2. Press **F9** → wait for the beep → **speak**.
-3. Press **F9** again → your words are transcribed and pasted at the cursor, editable.
+3. Press **F9** again → your words are transcribed and pasted into **that** field, editable.
 4. Review, fix anything, and press Enter.
+
+> The text always goes to **the window that was focused when you pressed F9 to start** — so it's
+> fine to glance at the voice-cli terminal while recording; the paste still lands in your target.
+> (Set `injector.refocus_target: false` to instead paste into whatever is focused at the end.)
 
 **Tips for best accuracy**
 - Wait for the beep, *then* speak; pause a beat before pressing stop.

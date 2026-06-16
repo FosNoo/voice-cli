@@ -32,6 +32,8 @@ transcriber:
 injector:
   mode: clipboard        # clipboard (paste, restore prior clipboard) | type (keystrokes)
   auto_submit: false     # keep false — text is editable; you press Enter yourself
+  refocus_target: true   # paste into the window that was focused when you pressed the hotkey
+                         # (Windows). Set false to paste into whatever is focused at the end.
 
 recordings:
   save: false            # set true only to debug captured audio (writes WAV files)
