@@ -1,0 +1,3 @@
+# Dev/test dependencies only — NOT needed to run voice-cli.
+#   pip install -r requirements-dev.txt
+pytest

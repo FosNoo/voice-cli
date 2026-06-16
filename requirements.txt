@@ -8,5 +8,5 @@ pyyaml                  # config
 keyboard                # global press-to-toggle hotkey
 pyperclip               # clipboard-paste injection
 
-# dev
-pytest
+# (ctranslate2, tokenizers, huggingface-hub, etc. install automatically with faster-whisper)
+# For the test suite only, see requirements-dev.txt

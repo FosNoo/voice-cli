@@ -103,8 +103,9 @@ src/voice_cli/
 └── cuda_paths.py   puts the pip CUDA DLLs on PATH for CTranslate2 (Windows GPU)
 ```
 
-Run the tests:
+Run the tests (dev deps only — not needed to use the tool):
 ```bash
+pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
