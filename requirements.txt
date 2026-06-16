@@ -1,0 +1,12 @@
+# voice-cli core dependencies (works on CPU out of the box).
+# For NVIDIA GPU acceleration, ALSO install requirements-gpu.txt (see README).
+
+faster-whisper>=1.1     # local speech-to-text (CTranslate2 backend)
+sounddevice             # microphone capture
+numpy
+pyyaml                  # config
+keyboard                # global press-to-toggle hotkey
+pyperclip               # clipboard-paste injection
+
+# dev
+pytest

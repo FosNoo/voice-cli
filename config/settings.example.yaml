@@ -1,0 +1,38 @@
+# voice-cli settings — copy to settings.yaml and edit. settings.yaml is gitignored.
+
+hotkey:
+  # Global press-to-start / press-again-to-stop key (toggle).
+  # A single non-typing key (f9) avoids colliding with normal typing.
+  toggle: "f9"
+
+audio:
+  device: null          # null = system default mic; or a device name/index
+  sample_rate: 16000    # faster-whisper expects 16 kHz mono
+  warmup_seconds: 0.4   # capture lead-in after the hotkey so the first word isn't clipped
+  tail_seconds: 0.4     # keep recording briefly after stop so the last word isn't cut
+
+transcriber:
+  engine: faster-whisper
+  model: small           # tiny | base | small | medium | large-v3 | distil-large-v3
+                         # On an NVIDIA GPU, use large-v3 for best accuracy.
+                         # On CPU, small/base are a good speed/accuracy trade.
+                         # NOTE: *.en and distil-large-v3 are ENGLISH-ONLY. For other
+                         # languages use a multilingual model (tiny/base/small/medium/large-v3).
+  device: auto           # auto | cuda | cpu   (auto = GPU if available, else CPU)
+  compute_type: auto     # auto | float16 | int8 | int8_float16 | float32
+  language: en           # language code (en, el, es, de, ...). null = auto-detect.
+                         # Whisper supports ~99 languages with a multilingual model.
+  vad_filter: true       # drop silence/noise -> fewer phantom words
+  condition_on_previous_text: false   # better for short, independent commands
+  beam_size: 5           # higher = more accurate, a bit slower (try 8)
+  # Optional: bias the model toward your vocabulary (names, jargon, domain terms).
+  # e.g. "Software dictation. Terms: function, parameter, pandas, CSV, while loop."
+  initial_prompt: null
+
+injector:
+  mode: clipboard        # clipboard (paste, restore prior clipboard) | type (keystrokes)
+  auto_submit: false     # keep false — text is editable; you press Enter yourself
+
+recordings:
+  save: false            # set true only to debug captured audio (writes WAV files)
+  dir: recordings

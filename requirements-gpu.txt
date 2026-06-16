@@ -1,0 +1,11 @@
+# NVIDIA GPU acceleration (optional) — install IN ADDITION to requirements.txt.
+# These provide the CUDA 12 runtime DLLs that CTranslate2 needs; no system CUDA
+# toolkit is required. Tested with an RTX 50-series (Blackwell, sm_120) on Windows.
+#
+#   pip install -r requirements-gpu.txt
+#
+# Then set `device: cuda` (or leave `auto`) and `model: large-v3` in settings.yaml.
+
+nvidia-cublas-cu12
+nvidia-cudnn-cu12
+nvidia-cuda-runtime-cu12
