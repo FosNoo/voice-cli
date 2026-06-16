@@ -88,7 +88,7 @@ def main() -> None:
                         focus_window(target["hwnd"])  # bring the target window back to front
                         time.sleep(0.12)  # let focus settle before pasting
                     injector.paste_text(text, restore_clipboard=restore)
-                    _log(f"-> inserted: {text}")
+                    _log(f"-> inserted ({len(text)} chars)")
                 else:
                     _log("(no speech detected)")
         except Exception as e:  # never let a bad turn kill the listener
