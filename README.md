@@ -40,6 +40,11 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+> ℹ️ **First install is large.** `faster-whisper` (the local speech-to-text engine) pulls in an
+> ML stack — CTranslate2, PyAV, ONNX Runtime, tokenizers, etc. — so `pip` downloads several dozen
+> packages (~a few hundred MB), one time. That's the cost of running AI transcription **locally**
+> instead of via a cloud API. The Whisper model itself downloads separately on first run.
+
 **For NVIDIA GPU acceleration (optional):**
 ```bash
 pip install -r requirements-gpu.txt
