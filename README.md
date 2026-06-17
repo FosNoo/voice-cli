@@ -1,5 +1,9 @@
 # voice-cli
 
+![platform: Windows only](https://img.shields.io/badge/platform-Windows-blue) ![license: MIT](https://img.shields.io/badge/license-MIT-green)
+
+> 🪟 **Windows only** (for now) — see [Requirements](#requirements).
+
 **Local push-to-talk dictation for your terminal and any text field.** Press a hotkey, speak,
 press again — your words are transcribed **on your own machine** and pasted as **editable text**
 wherever your cursor is. Nothing is auto-submitted and no audio ever leaves your computer.
@@ -23,20 +27,20 @@ typing — while keeping you in control of every line before it's sent.
 - 🔇 No telemetry, no accounts, no cloud.
 
 ## Requirements
-- **Windows 10/11** (primary target — uses a global hotkey, clipboard paste, and a beep cue).
-  The core is mostly cross-platform; minor tweaks may be needed on Linux/macOS.
+- **Windows 10/11 — required.** This tool is **Windows-only** right now: the global hotkey, the
+  clipboard paste (`Ctrl+V`), the "paste into the right window" focus handling, and the beep cue
+  all use Windows APIs. It does **not** work on macOS or Linux as-is (macOS needs `Cmd+V` and the
+  hotkey library doesn't support it; Linux would need different hotkey/clipboard/focus handling).
+  The transcription core (faster-whisper) is cross-platform, so a port is possible — but it isn't
+  done. Contributions welcome.
 - **Python 3.10+**
 - *(Optional)* an **NVIDIA GPU** for fast, high-accuracy transcription with larger models.
 
-## Install
+## Install (Windows)
 
-```bash
+```powershell
 python -m venv .venv
-# Windows:
 .\.venv\Scripts\Activate.ps1
-# Linux/macOS:
-# source .venv/bin/activate
-
 pip install -r requirements.txt
 ```
 
@@ -122,7 +126,7 @@ python -m pytest -q
 - It's a **dictation aid**, not perfect transcription. Fast, run-together speech will miss the
   occasional word — that's exactly why the text is editable before you send it.
 - Larger models on **CPU** are slow; use `small`/`base` on CPU, `large-v3` on a GPU.
-- Currently focused on **Windows**.
+- **Windows-only** for now — not supported on macOS or Linux (see Requirements for why).
 
 ## About FosNoo
 voice-cli is a free tool from **[FosNoo](https://fosnoo.com)** — a developer directory done
